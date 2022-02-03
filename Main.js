@@ -14,7 +14,7 @@ mongoose.connect(DBUrl)
     .catch((err)=>{console.log(err)})
 
 
-    app.get('./Users.js',(req, res)=>
+    app.get('/Users',(req, res)=>
 {
     var user = new user(
         {
