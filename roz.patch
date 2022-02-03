@@ -1,0 +1,91 @@
+diff --git a/Main.js b/Main.js
+index 5372666..c512528 100644
+--- a/Main.js
++++ b/Main.js
+@@ -1,38 +1,41 @@
+-const express = require('express')
+-const res = require('express/lib/response')
+-const mongoose =require('mongoose')
+-const path = require('path')
+-const user =require('./Users')
+-const app= express()
++const express = require("express");
++const res = require("express/lib/response");
++const mongoose = require("mongoose");
++const path = require("path");
++const User = require("./Users");
++const app = express();
+ 
+-app.use(express.json())
+-app.use(express.urlencoded({extended:false}))
++app.use(express.json());
++app.use(express.urlencoded({ extended: false }));
+ 
+-var DBUrl='mongodb+srv://test:1234@cluster0.9c0ug.mongodb.net/PaymentServer?retryWrites=true&w=majority'
+-mongoose.connect(DBUrl)
+-    .then(()=>{console.log("DB is Connected")})
+-    .catch((err)=>{console.log(err)})
++var DBUrl =
++  "mongodb+srv://test:1234@cluster0.9c0ug.mongodb.net/PaymentServer?retryWrites=true&w=majority";
++mongoose
++  .connect(DBUrl)
++  .then(() => {
++    console.log("DB is Connected");
++  })
++  .catch((err) => {
++    console.log(err);
++  });
+ 
++app.get("/users", (req, res) => {
++  
++  var user = new User({
++    name: "roz3x",
++    email: "oroz3x@gmail.com",
++    ReferredUser: "B",
++    isPaymentMade: "false",
++    totalEarnings: "50",
++  });
++  user
++    .save()
++    .then((result) => {
++      res.send(result);
++    })
++    .catch((err) => log.console(err));
++});
+ 
+-    app.get('/Users',(req, res)=>
+-{
+-    var user = new user(
+-        {
+-            "name":"harsh",
+-            "email":"harsh@gmail.com",
+-            "ReferredUser":"A",
+-            "isPaymentMade":'true',
+-            "totalEarnings":'50'
+-        }
+-    )
+-    user.save()
+-        .then((result)=>
+-        {
+-            res.send(result)
+-        })
+-        .catch((err)=>log.console(err))
+-})
+-
+-app.listen(5000,()=>{
+-    console.log("listening at port 5000");
+-})
++app.listen(5000, () => {
++  console.log("listening at port 5000");
++});
+diff --git a/package-lock.json b/package-lock.json
+index 451d655..fdc068d 100644
+--- a/package-lock.json
++++ b/package-lock.json
+@@ -1,5 +1,5 @@
+ {
+-  "name": "Refreal Project NodeJS",
++  "name": "Referral-Nodejs",
+   "lockfileVersion": 2,
+   "requires": true,
+   "packages": {

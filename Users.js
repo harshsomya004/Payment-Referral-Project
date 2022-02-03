@@ -11,7 +11,7 @@ const userSchema= new schema({
         reuired:true   
     },
     ReferredUser :{
-        type: String
+        type: this
     },
     isPaymentMade:{
         type: Boolean
